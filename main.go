@@ -136,8 +136,8 @@ func printGoMod() {
 		if err != nil {
 			log.Fatalf("could not clone subproject %s: %v", subproject, err)
 		}
-		year, month, day := subprojectCommit.Committer.When.Date()
-		hour, minute, second := subprojectCommit.Committer.When.Clock()
+		year, month, day := subprojectCommit.Committer.When.UTC().Date()
+		hour, minute, second := subprojectCommit.Committer.When.UTC().Clock()
 		date := fmt.Sprintf("%d%.2d%.2d%.2d%.2d%.2d", year, month, day, hour, minute, second)
 		revision := subprojectCommit.Hash
 		replaceList = append(replaceList, fmt.Sprintf("k8s.io/%s => k8s.io/%s v0.0.0-%s-%.12s", subproject, subproject, date, revision))
